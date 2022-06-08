@@ -13,6 +13,20 @@ const operator = (a, b, operator) => {
             operator === '/' ? divide(a,b) : 'Invalid operator';
 };
 
+function updateDisplayValue (value) {
+    displayValue.textContent += value;
+}
+
+let displayValue = document.querySelector('#display');
+
+let buttons = document.querySelectorAll('.operator');
+
+buttons.forEach(button => {
+        button.addEventListener('click', () => {
+        updateDisplayValue(button.id)
+    })
+})
+
 // let a = 5;
 // let b = 2;
 // console.log(add(a,b));
