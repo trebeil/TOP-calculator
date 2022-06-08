@@ -22,6 +22,11 @@ let number = '';
 let operator = '';
 let startNewNumber = true;
 document.querySelector('.dot').disabled = true;
+document.querySelector('.plus').disabled = true;
+document.querySelector('.minus').disabled = true;
+document.querySelector('.times').disabled = true;
+document.querySelector('.divided').disabled = true;
+document.querySelector('.equal').disabled = true;
 
 document.querySelectorAll('button').forEach(button => {
     if(button.classList.value.split(' ').some(value => value === 'number')) {
