@@ -21,6 +21,7 @@ let displayValue = document.querySelector('#display');
 let number = '';
 let operator = '';
 let startNewNumber = true;
+document.querySelector('.dot').disabled = true;
 
 document.querySelectorAll('button').forEach(button => {
     if(button.classList.value.split(' ').some(value => value === 'number')) {
@@ -30,14 +31,21 @@ document.querySelectorAll('button').forEach(button => {
                 startNewNumber = false;
             };
             updateDisplayValue(displayValue.textContent + button.id);
+            document.querySelector('.plus').disabled = false;
+            document.querySelector('.minus').disabled = false;
+            document.querySelector('.times').disabled = false;
+            document.querySelector('.divided').disabled = false;
+            document.querySelector('.equal').disabled = false;
+            if (displayValue.textContent.includes(".")) {
+                document.querySelector('.dot').disabled = true;
+            } else {
+                document.querySelector('.dot').disabled = false;
+            };
         });
     };
     if(button.classList.value.split(' ').some(value => value === 'operator')) {
         button.addEventListener('click', () => {
-            if (displayValue.textContent === 'Error: dividing by 0') {
-                operator = '';
-                startNewNumber = true;
-            } else if (operator === '') {
+            if (operator === '') {
                 number = displayValue.textContent;
                 operator = button.id;
                 startNewNumber = true;
@@ -47,6 +55,12 @@ document.querySelectorAll('button').forEach(button => {
                     number = '';
                     operator = '';
                     startNewNumber = true;
+                    document.querySelector('.dot').disabled = true;
+                    document.querySelector('.plus').disabled = true;
+                    document.querySelector('.minus').disabled = true;
+                    document.querySelector('.times').disabled = true;
+                    document.querySelector('.divided').disabled = true;
+                    document.querySelector('.equal').disabled = true;
                 } else {
                     updateDisplayValue(Math.round(operate(number*1, displayValue.textContent*1, operator)*100)/100);
                     number = displayValue.textContent;
@@ -59,16 +73,20 @@ document.querySelectorAll('button').forEach(button => {
     if(button.classList.value.split(' ').some(value => value === 'equal')) {
         button.addEventListener('click', () => {
             if(number !== '' && operator !== '') {
-                if (displayValue.textContent === 'Error: dividing by 0') {
-                    operator = '';
-                    startNewNumber = true;
-                } else if (operator === '/' && displayValue.textContent === '0') {
+                if (operator === '/' && displayValue.textContent === '0') {
                     updateDisplayValue(displayValue.textContent = 'Error: dividing by 0');
                     number = '';
                     operator = '';
                     startNewNumber = true;
+                    document.querySelector('.dot').disabled = true;
+                    document.querySelector('.plus').disabled = true;
+                    document.querySelector('.minus').disabled = true;
+                    document.querySelector('.times').disabled = true;
+                    document.querySelector('.divided').disabled = true;
+                    document.querySelector('.equal').disabled = true;
                 } else {
                     updateDisplayValue(displayValue.textContent = Math.round(operate(number*1, displayValue.textContent*1, operator)*100)/100);
+                    document.querySelector('.dot').disabled = true;
                     number = '';
                     operator = '';
                     startNewNumber = true;
@@ -78,7 +96,13 @@ document.querySelectorAll('button').forEach(button => {
     };
     if(button.classList.value.split(' ').some(value => value === 'clear')) {
         button.addEventListener('click', () => {
-            updateDisplayValue(displayValue.textContent = '0');
+            updateDisplayValue(displayValue.textContent = '');
+            document.querySelector('.dot').disabled = true;
+            document.querySelector('.plus').disabled = true;
+            document.querySelector('.minus').disabled = true;
+            document.querySelector('.times').disabled = true;
+            document.querySelector('.divided').disabled = true;
+            document.querySelector('.equal').disabled = true;
             number = '';
             operator = '';
             startNewNumber = true;
