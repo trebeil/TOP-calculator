@@ -65,8 +65,12 @@ function operatorClick(value) {
         disableBackspace = true;
         disableEqual = true;
     } else {
-        updateDisplayValue(Math.round(operate(number*1, displayValue.textContent*1, operator)*100)/100);
-        number = displayValue.textContent;
+        let result = Math.round(operate(number*1, displayValue.textContent*1, operator)*100)/100;
+        if (String(result).length > 14) {
+            result = result.toExponential(2);
+        };
+        updateDisplayValue(result);
+        number = result.toFixed();
         operator = value;
         startNewNumber = true;
         document.querySelector('.backspace').disabled = true;
@@ -93,7 +97,11 @@ function equalClick() {
             disableBackspace = true;
             disableEqual = true;
         } else {
-            updateDisplayValue(Math.round(operate(number*1, displayValue.textContent*1, operator)*100)/100);
+            let result = Math.round(operate(number*1, displayValue.textContent*1, operator)*100)/100;
+            if (String(result).length > 14) {
+                result = result.toExponential(2);
+            };
+            updateDisplayValue(result);
             document.querySelector('.dot').disabled = true;
             document.querySelector('.backspace').disabled = true;
             disableDot = true;
