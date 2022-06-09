@@ -110,6 +110,12 @@ function backspaceClick() {
     if (displayValue.textContent === '') {
         document.querySelector('.backspace').disabled = true;
         disableBackspace = true;
+        document.querySelector('.dot').disabled = true;
+        document.querySelector('.plus').disabled = true;
+        document.querySelector('.minus').disabled = true;
+        document.querySelector('.times').disabled = true;
+        document.querySelector('.divided').disabled = true;
+        disableOperators = true;
     };
 };
 
