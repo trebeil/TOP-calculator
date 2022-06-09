@@ -3,27 +3,50 @@
     <head>
         <meta charset="utf-8">
         <script src="script.js" defer></script>
+        <link href="styles.css" rel="stylesheet">
         <title>Calculator by trebeil</title>
     </head>
     <body>
-        <div id="display"></div>
-        <button class="number" id="9">9</button>
-        <button class="number" id="8">8</button>
-        <button class="number" id="7">7</button>
-        <button class="number" id="6">6</button>
-        <button class="number" id="5">5</button>
-        <button class="number" id="4">4</button>
-        <button class="number" id="3">3</button>
-        <button class="number" id="2">2</button>
-        <button class="number" id="1">1</button>
-        <button class="number" id="0">0</button>
-        <button class="number dot" id=".">.</button>
-        <button class="operator plus" id="+">+</button>
-        <button class="operator minus" id="-">-</button>
-        <button class="operator times" id="*">*</button>
-        <button class="operator divided" id="/">/</button>
-        <button class="equal" id="=">=</button>
-        <button class="backspace" id="backspace">Backspace</button>
-        <button class="clear" id="clear">Clear</button>
+        <h1 class="title">TOP's Calculator</h1>
+        <div class="calcContainer">
+            <div id="display"></div>
+            <div class="buttonsContainer">
+                <div class="digitsContainer">
+                    <div class="numbers">
+                        <button class="button number" id="7">7</button>
+                        <button class="button number" id="8">8</button>
+                        <button class="button number" id="9">9</button>
+                    </div>
+                    <div class="numbers">
+                        <button class="button number" id="4">4</button>
+                        <button class="button number" id="5">5</button>
+                        <button class="button number" id="6">6</button>
+                    </div>
+                    <div class="numbers">
+                        <button class="button number" id="1">1</button>
+                        <button class="button number" id="2">2</button>
+                        <button class="button number" id="3">3</button>
+                    </div>
+                    <div class="dotZeroContainer">
+                        <button class="button number zero" id="0">0</button>
+                        <button class="button number dot" id=".">.</button>
+                    </div>
+                </div>
+                <div class="nonDigitsContainer">
+                    <div class="operatorsContainer">
+                        <button class="button operator plus" id="+">+</button>
+                        <button class="button operator minus" id="-">-</button>
+                        <button class="button operator times" id="*">*</button>
+                        <button class="button operator divided" id="/">/</button>
+                    </div>
+                    <div class="equalContainer">
+                        <button class="button backspace" id="backspace">&#8592</button>
+                        <button class="button clear" id="clear">A/C</button>
+                        <button class="button equal" id="=">=</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">Copyright &copy; 2022 <a href="https://github.com/trebeil">trebeil</a></div>
     </body>
 </html>
