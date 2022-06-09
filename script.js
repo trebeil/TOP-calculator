@@ -26,9 +26,9 @@ document.querySelector('.plus').disabled = true;
 document.querySelector('.minus').disabled = true;
 document.querySelector('.times').disabled = true;
 document.querySelector('.divided').disabled = true;
+document.querySelector('.backspace').disabled = true;
 document.querySelector('.equal').disabled = true;
 
-// corrigir: dividindo por 0.0 não está dando erro
 document.querySelectorAll('button').forEach(button => {
     if(button.classList.value.split(' ').some(value => value === 'number')) {
         button.addEventListener('click', () => {
@@ -41,6 +41,7 @@ document.querySelectorAll('button').forEach(button => {
             document.querySelector('.minus').disabled = false;
             document.querySelector('.times').disabled = false;
             document.querySelector('.divided').disabled = false;
+            document.querySelector('.backspace').disabled = false;
             document.querySelector('.equal').disabled = false;
             if (displayValue.textContent.includes(".")) {
                 document.querySelector('.dot').disabled = true;
@@ -55,7 +56,31 @@ document.querySelectorAll('button').forEach(button => {
                 number = displayValue.textContent;
                 operator = button.id;
                 startNewNumber = true;
+                document.querySelector('.backspace').disabled = true;
+            } else if (operator === '/' && displayValue.textContent*1 === 0) {
+                updateDisplayValue('Error: dividing by 0');
+                number = '';
+                operator = '';
+                startNewNumber = true;
+                document.querySelector('.dot').disabled = true;
+                document.querySelector('.plus').disabled = true;
+                document.querySelector('.minus').disabled = true;
+                document.querySelector('.times').disabled = true;
+                document.querySelector('.divided').disabled = true;
+                document.querySelector('.backspace').disabled = true;
+                document.querySelector('.equal').disabled = true;
             } else {
+                updateDisplayValue(Math.round(operate(number*1, displayValue.textContent*1, operator)*100)/100);
+                number = displayValue.textContent;
+                operator = button.id;
+                startNewNumber = true;
+                document.querySelector('.backspace').disabled = true;
+            };
+        });
+    };
+    if(button.classList.value.split(' ').some(value => value === 'equal')) {
+        button.addEventListener('click', () => {
+            if(number !== '' && operator !== '') {
                 if (operator === '/' && displayValue.textContent*1 === 0) {
                     updateDisplayValue('Error: dividing by 0');
                     number = '';
@@ -66,48 +91,36 @@ document.querySelectorAll('button').forEach(button => {
                     document.querySelector('.minus').disabled = true;
                     document.querySelector('.times').disabled = true;
                     document.querySelector('.divided').disabled = true;
+                    document.querySelector('.backspace').disabled = true;
                     document.querySelector('.equal').disabled = true;
                 } else {
                     updateDisplayValue(Math.round(operate(number*1, displayValue.textContent*1, operator)*100)/100);
-                    number = displayValue.textContent;
-                    operator = button.id;
+                    document.querySelector('.dot').disabled = true;
+                    document.querySelector('.backspace').disabled = true;
+                    number = '';
+                    operator = '';
                     startNewNumber = true;
                 };
             };
         });
     };
-    if(button.classList.value.split(' ').some(value => value === 'equal')) {
+    if(button.classList.value.split(' ').some(value => value === 'backspace')) {
         button.addEventListener('click', () => {
-            if(number !== '' && operator !== '') {
-                if (operator === '/' && displayValue.textContent*1 === 0) {
-                    updateDisplayValue(displayValue.textContent = 'Error: dividing by 0');
-                    number = '';
-                    operator = '';
-                    startNewNumber = true;
-                    document.querySelector('.dot').disabled = true;
-                    document.querySelector('.plus').disabled = true;
-                    document.querySelector('.minus').disabled = true;
-                    document.querySelector('.times').disabled = true;
-                    document.querySelector('.divided').disabled = true;
-                    document.querySelector('.equal').disabled = true;
-                } else {
-                    updateDisplayValue(displayValue.textContent = Math.round(operate(number*1, displayValue.textContent*1, operator)*100)/100);
-                    document.querySelector('.dot').disabled = true;
-                    number = '';
-                    operator = '';
-                    startNewNumber = true;
-                };
+            updateDisplayValue(displayValue.textContent.slice(0,displayValue.textContent.length-1));
+            if (displayValue.textContent === '') {
+                document.querySelector('.backspace').disabled = true;
             };
         });
     };
     if(button.classList.value.split(' ').some(value => value === 'clear')) {
         button.addEventListener('click', () => {
-            updateDisplayValue(displayValue.textContent = '');
+            updateDisplayValue('');
             document.querySelector('.dot').disabled = true;
             document.querySelector('.plus').disabled = true;
             document.querySelector('.minus').disabled = true;
             document.querySelector('.times').disabled = true;
             document.querySelector('.divided').disabled = true;
+            document.querySelector('.backspace').disabled = true;
             document.querySelector('.equal').disabled = true;
             number = '';
             operator = '';
