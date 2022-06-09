@@ -28,6 +28,7 @@ document.querySelector('.times').disabled = true;
 document.querySelector('.divided').disabled = true;
 document.querySelector('.equal').disabled = true;
 
+// corrigir: dividindo por 0.0 não está dando erro
 document.querySelectorAll('button').forEach(button => {
     if(button.classList.value.split(' ').some(value => value === 'number')) {
         button.addEventListener('click', () => {
@@ -55,7 +56,7 @@ document.querySelectorAll('button').forEach(button => {
                 operator = button.id;
                 startNewNumber = true;
             } else {
-                if (operator === '/' && displayValue.textContent === '0') {
+                if (operator === '/' && displayValue.textContent*1 === 0) {
                     updateDisplayValue('Error: dividing by 0');
                     number = '';
                     operator = '';
@@ -78,7 +79,7 @@ document.querySelectorAll('button').forEach(button => {
     if(button.classList.value.split(' ').some(value => value === 'equal')) {
         button.addEventListener('click', () => {
             if(number !== '' && operator !== '') {
-                if (operator === '/' && displayValue.textContent === '0') {
+                if (operator === '/' && displayValue.textContent*1 === 0) {
                     updateDisplayValue(displayValue.textContent = 'Error: dividing by 0');
                     number = '';
                     operator = '';
