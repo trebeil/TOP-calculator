@@ -123,6 +123,7 @@ function backspaceClick() {
         document.querySelector('.minus').disabled = true;
         document.querySelector('.times').disabled = true;
         document.querySelector('.divided').disabled = true;
+        disableDot = true;
         disableOperators = true;
     };
 };
